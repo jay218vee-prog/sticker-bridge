@@ -14,6 +14,7 @@ import android.os.IBinder
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -292,9 +293,3 @@ private fun BridgeScreen(svc: BridgeService, ipProvider: () -> String) {
 
 private fun safeName(d: BluetoothDevice): String? =
     try { d.name } catch (_: SecurityException) { null }
-
-// Tiny clickable Modifier extension to avoid pulling in foundation just for clickable on this row
-@Composable
-private fun Modifier.clickable(onClick: () -> Unit): Modifier {
-    return androidx.compose.foundation.clickable(onClick = onClick).let { this.then(it) }
-}
